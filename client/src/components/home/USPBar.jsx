@@ -1,11 +1,32 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Globe, ShieldCheck, RefreshCw, Award } from 'lucide-react';
 
 const usps = [
-  { icon: Globe, title: "Worldwide Shipping", desc: "Tracked express dispatch" },
-  { icon: Award, title: "Premium Heavyweight", desc: "Crafted from 280-450 GSM cotton" },
-  { icon: RefreshCw, title: "14-Day Easy Returns", desc: "Hassle-free exchanges" },
-  { icon: ShieldCheck, title: "Secure Checkout", desc: "Encrypted & fraud protected" }
+  { 
+    icon: Globe, 
+    title: "Worldwide Shipping", 
+    desc: "Tracked express dispatch", 
+    link: "/shipping" 
+  },
+  { 
+    icon: Award, 
+    title: "Premium Heavyweight", 
+    desc: "Crafted from 280-450 GSM cotton", 
+    link: "/about" 
+  },
+  { 
+    icon: RefreshCw, 
+    title: "14-Day Easy Returns", 
+    desc: "Hassle-free exchanges", 
+    link: "/returns" 
+  },
+  { 
+    icon: ShieldCheck, 
+    title: "Secure Checkout", 
+    desc: "Encrypted & fraud protected", 
+    link: "/terms" 
+  }
 ];
 
 export default function USPBar() {
@@ -14,13 +35,19 @@ export default function USPBar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center md:text-left">
           {usps.map((usp, idx) => (
-            <div key={idx} className="flex flex-col md:flex-row items-center gap-3">
-              <usp.icon className="w-5 h-5 text-brandBlack flex-shrink-0" />
+            <Link
+              key={idx}
+              to={usp.link}
+              className="group flex flex-col md:flex-row items-center gap-3 p-2 hover:bg-neutral-100/60 transition-colors"
+            >
+              <usp.icon className="w-6 h-6 text-brandBlack group-hover:text-brandRed transition-colors flex-shrink-0" />
               <div>
-                <h4 className="text-xs font-bold uppercase tracking-wider text-brandBlack">{usp.title}</h4>
-                <p className="text-[11px] text-brandGrey">{usp.desc}</p>
+                <h4 className="text-sm font-bold uppercase tracking-wider text-brandBlack group-hover:text-brandRed transition-colors">
+                  {usp.title}
+                </h4>
+                <p className="text-sm text-neutral-600">{usp.desc}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

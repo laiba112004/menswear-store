@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import API from '../../api/axios';
+import { useCurrency } from '../../context/CurrencyContext';
 import { Search, X, ArrowRight } from 'lucide-react';
 
 export default function SearchModal({ isOpen, onClose }) {
+  const { formatPrice } = useCurrency();
   const [searchTerm, setSearchTerm] = useState('');
   const [allProducts, setAllProducts] = useState([]);
   const [filteredResults, setFilteredResults] = useState([]);
@@ -39,7 +41,7 @@ export default function SearchModal({ isOpen, onClose }) {
     <div className="fixed inset-0 z-50 overflow-y-auto bg-brandBlack/95 backdrop-blur-md flex flex-col p-4 sm:p-8">
       {/* Top Bar with Close */}
       <div className="max-w-4xl w-full mx-auto flex justify-between items-center pb-6 border-b border-brandCharcoal">
-        <span className="text-[10px] uppercase tracking-[0.3em] text-brandGold font-bold">
+        <span className="text-sm uppercase tracking-[0.2em] text-brandGold font-bold">
           Quick Product Search
         </span>
         <button
@@ -66,7 +68,7 @@ export default function SearchModal({ isOpen, onClose }) {
           {searchTerm && (
             <button
               onClick={() => setSearchTerm('')}
-              className="text-xs uppercase tracking-widest text-neutral-400 hover:text-white"
+              className="text-sm uppercase tracking-wider text-neutral-400 hover:text-white"
             >
               Clear
             </button>
@@ -78,7 +80,7 @@ export default function SearchModal({ isOpen, onClose }) {
       <div className="max-w-4xl w-full mx-auto mt-8 flex-1">
         {searchTerm && filteredResults.length === 0 ? (
           <div className="py-16 text-center text-neutral-400">
-            <p className="text-xs uppercase tracking-[0.25em]">No apparel matched "{searchTerm}"</p>
+            <p className="text-base uppercase tracking-wider">No apparel matched "{searchTerm}"</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -95,15 +97,15 @@ export default function SearchModal({ isOpen, onClose }) {
                   className="w-16 h-20 object-cover bg-neutral-900 flex-shrink-0"
                 />
                 <div className="min-w-0 flex-1">
-                  <span className="text-[9px] uppercase tracking-widest text-brandGold block">
+                  <span className="text-xs sm:text-sm uppercase tracking-wider text-brandGold font-bold block">
                     {product.category}
                   </span>
-                  <h4 className="text-xs font-bold text-white uppercase truncate group-hover:text-brandRed transition-colors">
+                  <h4 className="text-base font-bold text-white uppercase truncate group-hover:text-brandRed transition-colors">
                     {product.title}
                   </h4>
-                  <p className="text-xs font-bold text-neutral-300 mt-1">${product.price}</p>
+                  <p className="text-sm font-bold text-neutral-300 mt-1 font-mono">{formatPrice(product.price)}</p>
                 </div>
-                <ArrowRight size={16} className="text-neutral-500 group-hover:text-white transition-colors mr-2" />
+                <ArrowRight size={18} className="text-neutral-500 group-hover:text-white transition-colors mr-2" />
               </Link>
             ))}
           </div>

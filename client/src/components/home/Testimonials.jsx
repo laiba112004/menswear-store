@@ -41,7 +41,7 @@ export default function Testimonials() {
               <span className="text-2xl sm:text-3xl font-black font-serif text-brandBlack block">
                 {s.value}
               </span>
-              <span className="text-[10px] sm:text-[11px] uppercase tracking-widest text-brandGrey font-medium">
+              <span className="text-sm uppercase tracking-wider text-neutral-600 font-semibold">
                 {s.label}
               </span>
             </div>
@@ -50,7 +50,7 @@ export default function Testimonials() {
 
         {/* Section Heading */}
         <div className="text-center max-w-xl mx-auto my-14">
-          <span className="text-[10px] uppercase tracking-[0.3em] text-brandGrey font-bold">
+          <span className="text-xs sm:text-sm uppercase tracking-[0.2em] text-neutral-500 font-bold">
             Verified Feedback
           </span>
           <h2 className="text-3xl font-black uppercase tracking-tight text-brandBlack font-serif mt-1">
@@ -65,21 +65,21 @@ export default function Testimonials() {
               <div>
                 <div className="flex gap-1 text-brandGold mb-4">
                   {[...Array(5)].map((_, starIdx) => (
-                    <Star key={starIdx} size={14} fill="#C9A227" strokeWidth={0} />
+                    <Star key={starIdx} size={15} fill="#C9A227" strokeWidth={0} />
                   ))}
                 </div>
-                <p className="text-xs text-brandCharcoal leading-relaxed font-serif italic mb-6">
+                <p className="text-base text-brandCharcoal leading-relaxed font-serif italic mb-6">
                   "{r.quote}"
                 </p>
               </div>
 
               <div className="border-t border-neutral-300/60 pt-4 flex items-center justify-between">
                 <div>
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-brandBlack">{r.author}</h4>
-                  <span className="text-[10px] text-brandGrey uppercase tracking-widest">{r.location}</span>
+                  <h4 className="text-base font-bold uppercase tracking-wider text-brandBlack">{r.author}</h4>
+                  <span className="text-sm text-neutral-500 uppercase tracking-wider">{r.location}</span>
                 </div>
-                <div className="flex items-center gap-1 text-[10px] uppercase tracking-widest text-neutral-600 font-medium">
-                  <ShieldCheck size={13} className="text-brandBlack" />
+                <div className="flex items-center gap-1.5 text-sm uppercase tracking-wider text-neutral-700 font-medium">
+                  <ShieldCheck size={16} className="text-brandBlack" />
                   <span>Verified</span>
                 </div>
               </div>

@@ -14,28 +14,28 @@ export default function SizeGuideModal({ isOpen, onClose }) {
           <X size={20} />
         </button>
 
-        <h3 className="text-lg font-black uppercase tracking-widest font-serif text-brandBlack mb-1">
+        <h3 className="text-xl font-black uppercase tracking-tight font-serif text-brandBlack mb-1">
           Size & Measurement Guide
         </h3>
-        <p className="text-xs text-brandGrey mb-4">
+        <p className="text-sm text-neutral-600 mb-4">
           All measurements are in inches. True to oversized streetwear boxy fit.
         </p>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs border border-neutral-200">
+          <table className="w-full text-left text-sm border border-neutral-200">
             <thead className="bg-neutral-100 uppercase font-bold text-neutral-700">
               <tr>
-                <th className="p-2.5 border-b border-neutral-200">Size</th>
-                <th className="p-2.5 border-b border-neutral-200">Chest</th>
-                <th className="p-2.5 border-b border-neutral-200">Length</th>
-                <th className="p-2.5 border-b border-neutral-200">Shoulder</th>
+                <th className="p-3 border-b border-neutral-200">Size</th>
+                <th className="p-3 border-b border-neutral-200">Chest</th>
+                <th className="p-3 border-b border-neutral-200">Length</th>
+                <th className="p-3 border-b border-neutral-200">Shoulder</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-neutral-200 text-neutral-600">
-              <tr><td className="p-2.5 font-bold">S</td><td className="p-2.5">42</td><td className="p-2.5">28</td><td className="p-2.5">20.5</td></tr>
-              <tr><td className="p-2.5 font-bold">M</td><td className="p-2.5">44</td><td className="p-2.5">29</td><td className="p-2.5">21.5</td></tr>
-              <tr><td className="p-2.5 font-bold">L</td><td className="p-2.5">46</td><td className="p-2.5">30</td><td className="p-2.5">22.5</td></tr>
-              <tr><td className="p-2.5 font-bold">XL</td><td className="p-2.5">48</td><td className="p-2.5">31</td><td className="p-2.5">23.5</td></tr>
+            <tbody className="divide-y divide-neutral-200 text-neutral-700">
+              <tr><td className="p-3 font-bold text-brandBlack">S</td><td className="p-3">42</td><td className="p-3">28</td><td className="p-3">20.5</td></tr>
+              <tr><td className="p-3 font-bold text-brandBlack">M</td><td className="p-3">44</td><td className="p-3">29</td><td className="p-3">21.5</td></tr>
+              <tr><td className="p-3 font-bold text-brandBlack">L</td><td className="p-3">46</td><td className="p-3">30</td><td className="p-3">22.5</td></tr>
+              <tr><td className="p-3 font-bold text-brandBlack">XL</td><td className="p-3">48</td><td className="p-3">31</td><td className="p-3">23.5</td></tr>
             </tbody>
           </table>
         </div>

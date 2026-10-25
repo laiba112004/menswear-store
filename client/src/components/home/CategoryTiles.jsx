@@ -1,56 +1,104 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { ArrowUpRight } from 'lucide-react';
 
 const categories = [
   {
-    title: 'Heavy Fleece Hoodies',
-    category: 'Hoodies',
-    img: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800&q=80',
-  },
-  {
     title: 'Boxy Combed Tees',
-    category: 'T-Shirts',
-    img: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800&q=80',
+    subtitle: '280 GSM Organic Cotton',
+    slug: 't-shirts',
+    img: '/images/categories/cat-tees.jpg',
+    tag: 'Core Essential',
+    link: '/shop/t-shirts',
   },
   {
-    title: 'Tactical Utility Pants',
-    category: 'Pants',
-    img: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=800&q=80',
+    title: 'Heavy Fleece Hoodies',
+    subtitle: '450 GSM Heavy Fleece',
+    slug: 'hoodies',
+    img: '/images/categories/cat-hoodies.jpg',
+    tag: 'Best Seller',
+    link: '/shop/hoodies',
+  },
+  {
+    title: 'Vintage Knit Crewnecks',
+    subtitle: '450 GSM Loopback Fleece',
+    slug: 'crewnecks',
+    img: '/images/categories/cat-crewneck.jpg',
+    tag: 'New Capsule',
+    link: '/shop/crewnecks',
+  },
+  {
+    title: 'Tactical & Tailored Pants',
+    subtitle: 'Relaxed Streetwear Silhouette',
+    slug: 'pants',
+    img: '/images/categories/cat-pants.jpg',
+    tag: 'Trending Now',
+    link: '/shop/pants',
+  },
+  {
+    title: 'Raw Hem Sweat Shorts',
+    subtitle: '450 GSM Custom Fleece',
+    slug: 'shorts',
+    img: '/images/categories/cat-shorts.jpg',
+    tag: 'Summer Drop',
+    link: '/shop/shorts',
+  },
+  {
+    title: 'Hats & Daily Accessories',
+    subtitle: 'Caps, Beanies & Bags',
+    slug: 'hats',
+    img: '/images/products/cap-minimal-1.jpg',
+    tag: 'New Drop',
+    link: '/shop/hats',
   },
 ];
 
 export default function CategoryTiles() {
   return (
-    <section className="bg-brandWarmIvory py-16 border-t border-neutral-200">
+    <section className="bg-brandWarmIvory py-20 border-t border-neutral-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-xl mx-auto mb-12">
-          <span className="text-[11px] uppercase tracking-widest text-brandGrey font-bold">
-            Themed Capsules
-          </span>
-          <h2 className="text-3xl font-black uppercase tracking-tight text-brandBlack font-serif mt-1">
-            Shop By Silhouette
-          </h2>
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 pb-4 border-b border-neutral-300 gap-4">
+          <div>
+            <span className="text-xs sm:text-sm uppercase tracking-[0.2em] text-neutral-500 font-bold">
+              Curated Collections
+            </span>
+            <h2 className="text-3xl font-black uppercase tracking-tight text-brandBlack font-serif mt-1">
+              Shop By Category
+            </h2>
+          </div>
+          <Link
+            to="/shop"
+            className="text-sm uppercase tracking-wider text-brandBlack font-bold hover:text-brandRed flex items-center gap-1.5 transition-colors"
+          >
+            <span>View All</span>
+            <ArrowUpRight size={16} />
+          </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {categories.map((cat, idx) => (
             <Link
               key={idx}
-              to={`/shop?category=${cat.category}`}
-              className="group relative h-96 overflow-hidden bg-brandBlack"
+              to={cat.link || `/shop/${cat.slug}`}
+              className="group relative h-[440px] overflow-hidden bg-brandBlack shadow-md block"
             >
               <img
                 src={cat.img}
                 alt={cat.title}
-                className="w-full h-full object-cover opacity-70 group-hover:scale-105 transition-transform duration-700"
+                className="w-full h-full object-cover filter brightness-[0.70] contrast-[1.12] group-hover:scale-105 group-hover:brightness-[0.60] transition-all duration-700 ease-out"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-brandBlack/85 via-transparent to-transparent flex flex-col justify-end p-6">
-                <h3 className="text-xl font-bold uppercase text-white tracking-wider font-serif">
+              {/* Luxury gradient shadow */}
+              <div className="absolute inset-0 bg-gradient-to-t from-brandBlack via-brandBlack/30 to-transparent flex flex-col justify-end p-7">
+                <span className="text-sm uppercase tracking-wider text-brandGold font-bold mb-1.5 block">
+                  {cat.tag} • {cat.subtitle}
+                </span>
+                <h3 className="text-2xl font-bold uppercase text-white tracking-wider font-serif">
                   {cat.title}
                 </h3>
-                <span className="text-xs uppercase tracking-widest text-brandGold mt-1">
-                  Explore Collection →
-                </span>
+                <div className="mt-3 flex items-center gap-1.5 text-sm uppercase tracking-wider text-neutral-200 font-semibold group-hover:text-white transition-colors">
+                  <span>Explore Collection</span>
+                  <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </div>
               </div>
             </Link>
           ))}

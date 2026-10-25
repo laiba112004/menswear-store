@@ -8,9 +8,39 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>client</title>
+    <meta name="theme-color" content="#0B0B0B" />
+    <title>ATELIER — Luxury Heavyweight Streetwear & Essentials</title>
+    <meta name="description" content="Direct-to-consumer luxury menswear and essentials. Heavyweight 280-450 GSM hoodies, boxy combed cotton tees, and relaxed utility cargo pants built to last." />
+    <meta name="keywords" content="menswear, streetwear, heavyweight hoodie, boxy t-shirt, raw loopback cotton, luxury essentials, dark minimal fashion" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://atelierclothing.com/" />
+    <meta property="og:title" content="ATELIER — Luxury Heavyweight Streetwear & Essentials" />
+    <meta property="og:description" content="Premium heavyweight streetwear. Relaxed boxy fits. Crafted from 280–450 GSM organic cotton." />
+    <meta property="og:image" content="/images/hero/hero-slide-1.jpg" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="ATELIER — Luxury Heavyweight Streetwear & Essentials" />
+    <meta property="twitter:description" content="Premium heavyweight streetwear. Relaxed boxy fits. Crafted from 280–450 GSM organic cotton." />
+    <meta property="twitter:image" content="/images/hero/hero-slide-1.jpg" />
+
+    <!-- JSON-LD Structured Data for SEO (FR-10.2) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ClothingStore",
+        "name": "ATELIER",
+        "description": "Direct-to-consumer luxury menswear and essentials.",
+        "url": "https://atelierclothing.com",
+        "priceRange": "$$$",
+        "currenciesAccepted": "USD, CAD, EUR, GBP",
+        "paymentAccepted": "Credit Card, PayPal, Apple Pay, Google Pay"
+      }
+    </script>
   </head>
-  <body>
+  <body class="bg-white text-brandBlack antialiased selection:bg-brandBlack selection:text-white">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

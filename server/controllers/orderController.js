@@ -1,6 +1,5 @@
 const Order = require('../models/Order');
 
-
 exports.createOrder = async (req, res) => {
   try {
     const { orderItems, shippingAddress, guestEmail, totalPrice } = req.body;
@@ -12,11 +11,11 @@ exports.createOrder = async (req, res) => {
     const trackingCode = `ATL-${Math.floor(1000 + Math.random() * 9000)}-2026`;
 
     const order = new Order({
-      guestEmail,
+      guestEmail: guestEmail.toLowerCase(),
       orderItems,
       shippingAddress,
       totalPrice,
-      paymentMethod: 'Credit Card (Stripe Gateway)',
+      paymentMethod: req.body.paymentMethod || 'Credit Card (PCI-Gateway)',
       paymentResult: { id: trackingCode, status: 'Success' },
       orderStatus: 'Processing'
     });
@@ -32,7 +31,6 @@ exports.createOrder = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
 
 exports.trackOrder = async (req, res) => {
   try {
@@ -53,11 +51,23 @@ exports.trackOrder = async (req, res) => {
   }
 };
 
-
 exports.getAllOrders = async (req, res) => {
   try {
     const orders = await Order.find({}).sort({ createdAt: -1 });
     res.json(orders);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.updateOrderStatus = async (req, res) => {
+  try {
+    const { status } = req.body;
+    const order = await Order.findById(req.params.id);
+    if (!order) return res.status(404).json({ message: 'Order not found' });
+    order.orderStatus = status;
+    const updated = await order.save();
+    res.json(updated);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

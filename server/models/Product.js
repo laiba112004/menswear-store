@@ -17,7 +17,7 @@ const productSchema = new mongoose.Schema(
       {
         color: { type: String, required: true },
         colorCode: { type: String },
-        size: { type: String, required: true, enum: ['XS', 'S', 'M', 'L', 'XL', 'XXL'] },
+        size: { type: String, required: true, enum: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'OS', 'One Size'] },
         stock: { type: Number, required: true, default: 0 },
         sku: { type: String }
       }
