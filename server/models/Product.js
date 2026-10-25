@@ -11,7 +11,7 @@ const productSchema = new mongoose.Schema(
       required: true,
       enum: ['T-Shirts', 'Hoodies', 'Crewnecks', 'Pants', 'Shorts', 'Hats', 'Accessories']
     },
-    gender: { type: String, enum: ['Men', 'Women', 'Unisex'], default: 'Men' },
+    gender: { type: String, enum: ['Men', 'Women'], default: 'Men' },
     images: [{ type: String, required: true }],
     variants: [
       {

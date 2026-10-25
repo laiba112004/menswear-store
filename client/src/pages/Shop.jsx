@@ -16,7 +16,7 @@ export default function Shop() {
     'mens': 'Men',
     'women': 'Women',
     'womens': 'Women',
-    'unisex': 'Unisex'
+
   };
 
   const CATEGORY_MAP = {
@@ -105,7 +105,7 @@ export default function Shop() {
         if (selectedSort) endpoint += `sort=${encodeURIComponent(selectedSort)}&`;
         if (selectedSize) endpoint += `size=${encodeURIComponent(selectedSize)}&`;
         if (selectedColor) endpoint += `color=${encodeURIComponent(selectedColor)}&`;
-        
+
         if (selectedPrice === 'under-60') {
           endpoint += `maxPrice=59&`;
         } else if (selectedPrice === '60-100') {
@@ -210,13 +210,13 @@ export default function Shop() {
             Curated Collection • {products.length} {products.length === 1 ? 'Product' : 'Products'}
           </span>
           <h1 className="text-3xl sm:text-4xl font-black uppercase tracking-tight font-serif text-brandBlack mt-1.5">
-            {selectedGender && selectedCategory 
-              ? `${selectedGender}'s ${selectedCategory}` 
-              : selectedGender 
-              ? `${selectedGender}'s Apparel` 
-              : selectedCategory 
-              ? `${selectedCategory} Collection` 
-              : 'All Products'}
+            {selectedGender && selectedCategory
+              ? `${selectedGender}'s ${selectedCategory}`
+              : selectedGender
+                ? `${selectedGender}'s Apparel`
+                : selectedCategory
+                  ? `${selectedCategory} Collection`
+                  : 'All Products'}
           </h1>
           <p className="text-sm text-neutral-600 mt-1.5 max-w-xl leading-relaxed">
             Premium heavyweight fleece, combed organic cotton, and streetwear accessories.
@@ -233,11 +233,10 @@ export default function Shop() {
                 <button
                   key={aud.value}
                   onClick={() => handleGenderClick(aud.value)}
-                  className={`px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap ${
-                    active
+                  className={`px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap ${active
                       ? 'bg-brandBlack text-white shadow-sm'
                       : 'text-neutral-600 hover:text-brandBlack'
-                  }`}
+                    }`}
                 >
                   {aud.label}
                 </button>
@@ -282,11 +281,10 @@ export default function Shop() {
                   <button
                     key={cat}
                     onClick={() => handleCategoryClick(cat)}
-                    className={`text-sm uppercase tracking-wider text-left py-2 transition-all font-semibold ${
-                      active
+                    className={`text-sm uppercase tracking-wider text-left py-2 transition-all font-semibold ${active
                         ? 'font-bold text-brandRed border-l-2 border-brandRed pl-3 bg-neutral-50'
                         : 'text-neutral-500 hover:text-brandBlack hover:pl-1'
-                    }`}
+                      }`}
                   >
                     {cat}
                   </button>
@@ -307,11 +305,10 @@ export default function Shop() {
                   <button
                     key={s}
                     onClick={() => updateParam('size', active ? '' : s)}
-                    className={`w-10 h-10 text-sm font-bold uppercase border transition-all ${
-                      active
+                    className={`w-10 h-10 text-sm font-bold uppercase border transition-all ${active
                         ? 'border-brandBlack bg-brandBlack text-white shadow-sm'
                         : 'border-neutral-300 text-brandBlack hover:border-black'
-                    }`}
+                      }`}
                   >
                     {s}
                   </button>
@@ -332,9 +329,8 @@ export default function Shop() {
                   <button
                     key={p.value}
                     onClick={() => updateParam('priceRange', p.value)}
-                    className={`block w-full text-left uppercase tracking-wider py-1.5 transition-colors ${
-                      active ? 'font-bold text-brandRed' : 'text-neutral-500 hover:text-brandBlack'
-                    }`}
+                    className={`block w-full text-left uppercase tracking-wider py-1.5 transition-colors ${active ? 'font-bold text-brandRed' : 'text-neutral-500 hover:text-brandBlack'
+                      }`}
                   >
                     {p.label}
                   </button>

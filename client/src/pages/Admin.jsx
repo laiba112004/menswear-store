@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import API from '../api/axios';
 import { useCurrency } from '../context/CurrencyContext';
-import { 
-  ShoppingBag, 
-  Plus, 
-  RefreshCw, 
-  CheckCircle, 
-  Package, 
-  Trash2, 
-  Layers, 
-  Edit3, 
-  X, 
-  AlertTriangle, 
-  Eye, 
-  ShieldCheck, 
+import {
+  ShoppingBag,
+  Plus,
+  RefreshCw,
+  CheckCircle,
+  Package,
+  Trash2,
+  Layers,
+  Edit3,
+  X,
+  AlertTriangle,
+  Eye,
+  ShieldCheck,
   Image as ImageIcon,
   Upload,
   Folder,
@@ -127,9 +127,8 @@ function ImageInputControl({
                   onChange(p.path);
                   setShowPresets(false);
                 }}
-                className={`p-1 text-left border rounded transition-all flex flex-col items-center gap-1 ${
-                  value === p.path ? 'border-brandBlack bg-white shadow-sm ring-1 ring-black' : 'border-neutral-200 hover:border-neutral-400 bg-white'
-                }`}
+                className={`p-1 text-left border rounded transition-all flex flex-col items-center gap-1 ${value === p.path ? 'border-brandBlack bg-white shadow-sm ring-1 ring-black' : 'border-neutral-200 hover:border-neutral-400 bg-white'
+                  }`}
               >
                 <img src={p.path} alt={p.name} className="w-full h-14 object-cover bg-neutral-100" />
                 <span className="text-xs font-semibold text-neutral-700 leading-tight text-center line-clamp-1">{p.name}</span>
@@ -407,7 +406,7 @@ export default function Admin() {
       const res = await API.post('/products', payload);
       setProducts([res.data, ...products]);
       showToast(`"${res.data.title}" published live to catalog!`);
-      
+
       // Reset form
       setProductForm({
         title: '',
@@ -434,7 +433,7 @@ export default function Admin() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full relative">
-      
+
       {/* IN-APP TOAST NOTIFICATION POPUP (No native alert/confirm popups) */}
       {toast && (
         <div className="fixed top-20 right-6 z-50 flex items-center gap-3 px-5 py-3.5 bg-brandBlack text-white border border-brandGold shadow-2xl rounded-none text-xs font-semibold uppercase tracking-wider animate-bounce-short">
@@ -468,31 +467,28 @@ export default function Admin() {
         <div className="flex flex-wrap items-center gap-2">
           <button
             onClick={() => setActiveTab('orders')}
-            className={`px-4 py-2.5 text-sm font-bold uppercase tracking-wider flex items-center gap-2 transition-all ${
-              activeTab === 'orders'
-                ? 'bg-brandBlack text-white shadow-sm'
-                : 'border border-neutral-300 text-brandBlack hover:border-black'
-            }`}
+            className={`px-4 py-2.5 text-sm font-bold uppercase tracking-wider flex items-center gap-2 transition-all ${activeTab === 'orders'
+              ? 'bg-brandBlack text-white shadow-sm'
+              : 'border border-neutral-300 text-brandBlack hover:border-black'
+              }`}
           >
             <ShoppingBag size={16} /> Orders Desk ({orders.length})
           </button>
           <button
             onClick={() => setActiveTab('catalog')}
-            className={`px-4 py-2.5 text-sm font-bold uppercase tracking-wider flex items-center gap-2 transition-all ${
-              activeTab === 'catalog'
-                ? 'bg-brandBlack text-white shadow-sm'
-                : 'border border-neutral-300 text-brandBlack hover:border-black'
-            }`}
+            className={`px-4 py-2.5 text-sm font-bold uppercase tracking-wider flex items-center gap-2 transition-all ${activeTab === 'catalog'
+              ? 'bg-brandBlack text-white shadow-sm'
+              : 'border border-neutral-300 text-brandBlack hover:border-black'
+              }`}
           >
             <Layers size={16} /> Inventory ({products.length})
           </button>
           <button
             onClick={() => setActiveTab('newProduct')}
-            className={`px-4 py-2.5 text-sm font-bold uppercase tracking-wider flex items-center gap-2 transition-all ${
-              activeTab === 'newProduct'
-                ? 'bg-brandBlack text-white shadow-sm'
-                : 'border border-neutral-300 text-brandBlack hover:border-black'
-            }`}
+            className={`px-4 py-2.5 text-sm font-bold uppercase tracking-wider flex items-center gap-2 transition-all ${activeTab === 'newProduct'
+              ? 'bg-brandBlack text-white shadow-sm'
+              : 'border border-neutral-300 text-brandBlack hover:border-black'
+              }`}
           >
             <Plus size={16} /> Publish Piece
           </button>
@@ -689,7 +685,7 @@ export default function Admin() {
           </div>
 
           <form onSubmit={handleProductSubmit} className="space-y-6 text-sm">
-            
+
             {/* 1. Product Identity */}
             <div className="space-y-4">
               <h3 className="text-sm font-bold uppercase tracking-wider text-brandBlack border-b border-neutral-100 pb-1">
@@ -741,7 +737,7 @@ export default function Admin() {
                   >
                     <option value="Men">Men</option>
                     <option value="Women">Women</option>
-                    <option value="Unisex">Unisex</option>
+
                   </select>
                 </div>
               </div>
@@ -974,7 +970,7 @@ export default function Admin() {
                   >
                     <option value="Men">Men</option>
                     <option value="Women">Women</option>
-                    <option value="Unisex">Unisex</option>
+
                   </select>
                 </div>
               </div>
