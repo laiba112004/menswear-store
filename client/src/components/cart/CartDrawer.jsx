@@ -1,15 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import { useCurrency } from '../../context/CurrencyContext';
-import { X, Trash2, ArrowRight, ShoppingBag, Plus, Minus } from 'lucide-react';
+import { X, Trash2, ArrowRight, ShoppingBag, Plus, Minus, Tag } from 'lucide-react';
 
 export default function CartDrawer({ isOpen, onClose }) {
-  const { cartItems, removeFromCart, updateQuantity, totalAmount, totalCount } = useCart();
+  const { 
+    cartItems, 
+    removeFromCart, 
+    updateQuantity, 
+    rawSubtotal,
+    discountPercent,
+    discountAmount,
+    totalAmount, 
+    totalCount,
+    appliedPromo,
+    applyPromoCode,
+    removePromoCode 
+  } = useCart();
   const { formatPrice } = useCurrency();
+
+  const [promoInput, setPromoInput] = useState('');
+  const [promoMsg, setPromoMsg] = useState({ text: '', isError: false });
 
   const freeShippingThreshold = 150;
   const remainingForFreeShipping = Math.max(0, freeShippingThreshold - totalAmount);
+  const progressPercent = Math.min(100, Math.round((totalAmount / freeShippingThreshold) * 100));
+
+  const handleApplyPromo = (e) => {
+    e.preventDefault();
+    if (!promoInput.trim()) return;
+    const result = applyPromoCode(promoInput);
+    if (result.success) {
+      setPromoMsg({ text: result.message, isError: false });
+      setPromoInput('');
+    } else {
+      setPromoMsg({ text: result.message, isError: true });
+    }
+  };
 
   if (!isOpen) return null;
 
@@ -39,12 +67,20 @@ export default function CartDrawer({ isOpen, onClose }) {
           <div className="bg-brandWarmIvory px-5 py-3 border-b border-neutral-200 text-center">
             {remainingForFreeShipping === 0 ? (
               <p className="text-sm font-bold uppercase tracking-wider text-green-800">
-                ✓ Unlocked: Free Worldwide Shipping
+                ✓ Unlocked: Free Worldwide Shipping ($150+)
               </p>
             ) : (
-              <p className="text-sm uppercase tracking-wider text-neutral-700">
-                Add <span className="font-bold text-brandBlack">{formatPrice(remainingForFreeShipping)}</span> more for Free Shipping
-              </p>
+              <div className="space-y-1.5">
+                <p className="text-xs sm:text-sm uppercase tracking-wider text-neutral-700">
+                  Add <span className="font-bold text-brandBlack">{formatPrice(remainingForFreeShipping)}</span> more for Free Shipping ($150)
+                </p>
+                <div className="w-full bg-neutral-200 h-1.5 rounded-full overflow-hidden">
+                  <div 
+                    className="bg-brandBlack h-full transition-all duration-300"
+                    style={{ width: `${progressPercent}%` }}
+                  />
+                </div>
+              </div>
             )}
           </div>
 
@@ -118,26 +154,84 @@ export default function CartDrawer({ isOpen, onClose }) {
           {/* Bottom Checkout Actions */}
           {cartItems.length > 0 && (
             <div className="p-5 border-t border-neutral-200 bg-neutral-50 space-y-3">
-              <div className="flex justify-between text-sm uppercase tracking-wider font-semibold">
-                <span>Subtotal</span>
-                <span className="font-black text-base font-mono">{formatPrice(totalAmount)}</span>
+              {/* Promo Code Box inside Drawer */}
+              <div className="space-y-1.5 pb-2 border-b border-neutral-200">
+                {discountPercent > 0 ? (
+                  <div className="flex items-center justify-between bg-brandWarmIvory p-2.5 border border-brandGold/40 text-xs sm:text-sm">
+                    <div className="flex items-center gap-1.5 font-bold text-brandBlack uppercase tracking-wider">
+                      <Tag size={14} className="text-brandGold" />
+                      <span>{appliedPromo || 'FIRST10'} (-{discountPercent}%)</span>
+                    </div>
+                    <button
+                      onClick={() => {
+                        removePromoCode();
+                        setPromoMsg({ text: '', isError: false });
+                      }}
+                      className="text-brandRed text-xs sm:text-sm uppercase font-bold hover:underline"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ) : (
+                  <form onSubmit={handleApplyPromo} className="flex gap-2">
+                    <input
+                      type="text"
+                      placeholder="PROMO CODE (e.g. FIRST10)"
+                      value={promoInput}
+                      onChange={(e) => setPromoInput(e.target.value)}
+                      className="flex-1 border border-neutral-300 px-3 py-2 text-xs uppercase tracking-wider focus:outline-none focus:border-brandBlack bg-white"
+                    />
+                    <button
+                      type="submit"
+                      className="px-4 py-2 bg-brandBlack text-white text-xs font-bold uppercase tracking-wider hover:bg-brandSoftBlack transition-colors"
+                    >
+                      Apply
+                    </button>
+                  </form>
+                )}
+                {promoMsg.text && (
+                  <p
+                    className={`text-xs uppercase tracking-wider font-bold ${
+                      promoMsg.isError ? 'text-brandRed' : 'text-green-700'
+                    }`}
+                  >
+                    {promoMsg.text}
+                  </p>
+                )}
               </div>
-              <p className="text-xs sm:text-sm text-neutral-500 tracking-wider">Duties, taxes & currency converted at checkout.</p>
+
+              {/* Price Breakdown */}
+              <div className="space-y-1.5 text-xs sm:text-sm uppercase tracking-wider text-neutral-600">
+                <div className="flex justify-between">
+                  <span>Subtotal</span>
+                  <span className="font-bold text-brandBlack font-mono">{formatPrice(rawSubtotal)}</span>
+                </div>
+                {discountPercent > 0 && (
+                  <div className="flex justify-between text-brandRed font-bold">
+                    <span>Discount ({discountPercent}%)</span>
+                    <span className="font-mono">-{formatPrice(discountAmount)}</span>
+                  </div>
+                )}
+                <div className="flex justify-between text-brandBlack font-bold pt-1 border-t border-neutral-200">
+                  <span className="text-sm">Total</span>
+                  <span className="font-black text-base font-mono">{formatPrice(totalAmount)}</span>
+                </div>
+              </div>
               
               <div className="grid grid-cols-2 gap-2 pt-1">
                 <Link
                   to="/cart"
                   onClick={onClose}
-                  className="py-3.5 border border-brandBlack text-brandBlack font-bold text-sm uppercase tracking-wider text-center hover:bg-neutral-100 transition-all"
+                  className="py-3 border border-brandBlack text-brandBlack font-bold text-xs uppercase tracking-wider text-center hover:bg-neutral-100 transition-all"
                 >
                   View Bag
                 </Link>
                 <Link
                   to="/checkout"
                   onClick={onClose}
-                  className="py-3.5 bg-brandBlack text-white font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-1.5 hover:bg-brandSoftBlack transition-all"
+                  className="py-3 bg-brandBlack text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 hover:bg-brandSoftBlack transition-all"
                 >
-                  Checkout <ArrowRight size={15} />
+                  Checkout <ArrowRight size={14} />
                 </Link>
               </div>
             </div>

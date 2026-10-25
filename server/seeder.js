@@ -149,7 +149,7 @@ const sampleProducts = [
       { color: 'Forest Green', colorCode: '#1E3A2F', size: 'S', stock: 10, sku: 'HD-GRN-S' },
       { color: 'Forest Green', colorCode: '#1E3A2F', size: 'M', stock: 18, sku: 'HD-GRN-M' },
       { color: 'Forest Green', colorCode: '#1E3A2F', size: 'L', stock: 15, sku: 'HD-GRN-L' },
-      { color: 'Forest Green', colorCode: '#1E3A2F', size: 'XL', stock: 8, sku: 'HD-GRN-XL' }
+      { color: 'Forest Green', colorCode: '#1E3A2F', size: 'XL', stock: 0, sku: 'HD-GRN-XL' }
     ]
   },
   {
@@ -209,7 +209,7 @@ const sampleProducts = [
       { color: 'Washed Black', colorCode: '#1A1A1A', size: 'S', stock: 12, sku: 'HD-WSH-S' },
       { color: 'Washed Black', colorCode: '#1A1A1A', size: 'M', stock: 18, sku: 'HD-WSH-M' },
       { color: 'Washed Black', colorCode: '#1A1A1A', size: 'L', stock: 15, sku: 'HD-WSH-L' },
-      { color: 'Washed Black', colorCode: '#1A1A1A', size: 'XL', stock: 8, sku: 'HD-WSH-XL' }
+      { color: 'Washed Black', colorCode: '#1A1A1A', size: 'XL', stock: 0, sku: 'HD-WSH-XL' }
     ]
   },
   {
